@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Penyakit;
 use Illuminate\Http\Request;
 
 class PenyakitController extends Controller
@@ -12,37 +13,30 @@ class PenyakitController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return view('pages.penyakit', [
+            'daftarPenyakit' => Penyakit::orderBy('nama')->get()
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
-    }
+        $data = request()->validate([
+            'nama' => 'required',
+            'keterangan' => 'required'
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        Penyakit::create($data);
+
+        return redirect()->back()->with('success', 'Berhasil menambah data penyakit');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Penyakit $penyakit)
     {
         //
     }
@@ -50,16 +44,25 @@ class PenyakitController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Penyakit $penyakit)
     {
-        //
+        $data = request()->validate([
+            'nama' => 'required',
+            'keterangan' => 'required'
+        ]);
+
+        $penyakit->update($data);
+
+        return redirect()->back()->with('success', 'Update data penyakit berhasil');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Penyakit $penyakit)
     {
-        //
+        $penyakit->delete();
+
+        return redirect()->back()->with('success', 'Berhasil menghapus data penyakit');
     }
 }

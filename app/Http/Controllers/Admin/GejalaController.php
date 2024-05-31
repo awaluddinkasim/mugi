@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Gejala;
 use Illuminate\Http\Request;
 
 class GejalaController extends Controller
@@ -12,37 +13,29 @@ class GejalaController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return view('pages.gejala', [
+            'daftarGejala' => Gejala::orderBy('nama')->get()
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
-    }
+        $data = request()->validate([
+            'nama' => 'required',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        Gejala::create($data);
+
+        return redirect()->back()->with('success', 'Berhasil menambah data gejala');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Gejala $gejala)
     {
         //
     }
@@ -50,16 +43,25 @@ class GejalaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Gejala $gejala)
     {
-        //
+        $data = request()->validate([
+            'nama' => 'required',
+            'keterangan' => 'required'
+        ]);
+
+        $gejala->update($data);
+
+        return redirect()->back()->with('success', 'Update data gejala berhasil');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Gejala $gejala)
     {
-        //
+        $gejala->delete();
+
+        return redirect()->back()->with('success', 'Berhasil menghapus data gejala');
     }
 }

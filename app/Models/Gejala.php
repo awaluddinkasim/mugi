@@ -12,6 +12,10 @@ class Gejala extends Model
 
     protected $table = 'gejala';
 
+    protected $fillable = [
+        'nama',
+    ];
+
     public function penyakit(): BelongsToMany
     {
         return $this->belongsToMany(Penyakit::class, 'gejala_penyakit');
