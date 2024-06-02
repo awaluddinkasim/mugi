@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Relasi extends Model
 {
@@ -12,7 +13,12 @@ class Relasi extends Model
     protected $table = 'gejala_penyakit';
 
     protected $fillable = [
-        'id_gejala',
-        'id_penyakit'
+        'gejala_id',
+        'penyakit_id'
     ];
+
+    public function gejala(): BelongsTo
+    {
+        return $this->belongsTo(Gejala::class);
+    }
 }

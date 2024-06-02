@@ -37,12 +37,12 @@
                     </a>
                 </li>
 
-                <li>
+                {{-- <li>
                     <a href="{{ route('result.index') }}">
                         <i data-feather="clipboard"></i>
                         <span data-key="t-relasi">Hasil Diagnosa</span>
                     </a>
-                </li>
+                </li> --}}
 
                 <li>
                     <a href="{{ route('user.index') }}">

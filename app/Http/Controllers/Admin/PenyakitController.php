@@ -38,7 +38,7 @@ class PenyakitController extends Controller
      */
     public function edit(Penyakit $penyakit)
     {
-        //
+        return view('pages.penyakit-edit', compact('penyakit'));
     }
 
     /**
@@ -53,7 +53,7 @@ class PenyakitController extends Controller
 
         $penyakit->update($data);
 
-        return redirect()->back()->with('success', 'Update data penyakit berhasil');
+        return redirect()->route('penyakit.index')->with('success', 'Update data penyakit berhasil');
     }
 
     /**

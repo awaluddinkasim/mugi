@@ -23,6 +23,8 @@
     <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
     <link href="{{ asset('assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
+
+    @stack('styles')
 </head>
 
 <body>
@@ -144,6 +146,8 @@
     <script src="{{ asset('assets/libs/feather-icons/feather.min.js') }}"></script>
 
     <script src="{{ asset('assets/js/app.js') }}"></script>
+
+    @stack('scripts')
 </body>
 
 </html>

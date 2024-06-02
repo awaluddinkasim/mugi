@@ -37,7 +37,7 @@ class GejalaController extends Controller
      */
     public function edit(Gejala $gejala)
     {
-        //
+        return view('pages.gejala-edit', compact('gejala'));
     }
 
     /**
@@ -47,12 +47,11 @@ class GejalaController extends Controller
     {
         $data = request()->validate([
             'nama' => 'required',
-            'keterangan' => 'required'
         ]);
 
         $gejala->update($data);
 
-        return redirect()->back()->with('success', 'Update data gejala berhasil');
+        return redirect()->route('gejala.index')->with('success', 'Update data gejala berhasil');
     }
 
     /**

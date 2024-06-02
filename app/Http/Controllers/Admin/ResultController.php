@@ -14,7 +14,7 @@ class ResultController extends Controller
     public function index()
     {
         return view('pages.result', [
-            'results' => Result::with(['user', 'penyakit'])->all()
+            'results' => Result::with(['user', 'penyakit'])->get()
         ]);
     }
 
