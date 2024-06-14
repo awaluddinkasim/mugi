@@ -24,7 +24,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('pages.user-edit', compact('user'));
     }
 
     /**
@@ -48,7 +48,7 @@ class UserController extends Controller
 
         $user->update($data);
 
-        return redirect()->back()->with('success', 'Update data pengguna berhasil');
+        return redirect()->route('user.index')->with('success', 'Update data pengguna berhasil');
     }
 
     /**
