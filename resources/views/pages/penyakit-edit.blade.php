@@ -11,8 +11,8 @@
                         @csrf
                         <x-form.input label="Nama Penyakit" id="penyakitInput" name="nama" :value="$penyakit->nama"
                             :required="true" />
-                        <x-form.textarea label="Keterangan" id="keteranganInput" name="keterangan"
-                            :required="true">{{ $penyakit->keterangan }}</x-form.textarea>
+                        <x-form.textarea label="Solusi" id="solusiInput" name="solusi"
+                            :required="true">{{ $penyakit->solusi }}</x-form.textarea>
 
                         <button class="btn btn-primary">Simpan</button>
                     </form>

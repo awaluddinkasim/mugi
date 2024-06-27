@@ -3,72 +3,59 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\PenyakitResource;
+use App\Http\Resources\HasilDiagnosa;
 use App\Models\Penyakit;
-use App\Models\Relasi;
 use App\Models\Result;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class PenyakitController extends Controller
 {
-    public function get(): JsonResponse
+    public function hasil(): JsonResponse
     {
         return response()->json([
             'message' => 'success',
-            'daftarPenyakit' => PenyakitResource::collection(Penyakit::orderBy('nama')->get())
+            'diagnosa' => HasilDiagnosa::collection(User::find(auth()->user()->id)->diagnosa)
         ], 200);
     }
 
     public function diagnosa(): JsonResponse
     {
-        $gejalaPengguna = request()->validate(['gejala' => 'required']);
+        $gejalaPengguna = request()->validate(['gejala' => 'required|array']);
 
-        $relasi = Relasi::all();
+        $daftarPenyakit = Penyakit::with('gejala')->get();
+        $possibleDiagnoses = [];
 
-        $penyakitCount = [];
+        foreach ($daftarPenyakit as $penyakit) {
+            $gejalaPenyakit = $penyakit->gejala->pluck('id')->toArray();
+            $gejalaCocok = array_intersect($gejalaPenyakit, $gejalaPengguna);
 
-        foreach ($relasi as $aturan) {
-            $gejalaAturan = $aturan->gejala_id;
+            $persentaseCocok = count($gejalaCocok) / count($gejalaPenyakit);
 
-            $gejalaDitemukan = true;
-            foreach ($gejalaAturan as $gejala) {
-                if (!in_array($gejala, $gejalaPengguna)) {
-                    $gejalaDitemukan = false;
-                    break;
-                }
-            }
-
-            if ($gejalaDitemukan) {
-                $penyakit = $aturan->penyakit_id;
-                $totalGejalaPenyakit = count(Relasi::where('penyakit_id', $penyakit)->get()->pluck('gejala_id')->flatten()->unique());
-
-                $minJumlahGejala = ceil(0.5 * $totalGejalaPenyakit);
-
-                $jumlahGejalaCocok = count($gejalaAturan);
-
-                if ($jumlahGejalaCocok >= $minJumlahGejala) {
-                    if (!isset($penyakitCount[$penyakit])) {
-                        $penyakitCount[$penyakit] = 1;
-                    } else {
-                        $penyakitCount[$penyakit]++;
-                    }
-                }
+            if ($persentaseCocok > 0) {
+                $possibleDiagnoses[] = [
+                    'penyakit' => $penyakit,
+                    'persentase' => $persentaseCocok,
+                ];
             }
         }
 
-        arsort($penyakitCount);
-        $penyakitTerbanyak = key($penyakitCount);
+        usort($possibleDiagnoses, function ($a, $b) {
+            return $b['persentase'] - $a['persentase'];
+        });
 
-        $hasilDiagnosa = new Result();
-        $hasilDiagnosa->user_id = auth()->user()->id;
-        $hasilDiagnosa->penyakit_id = $penyakitTerbanyak;
-        $hasilDiagnosa->save();
-
-        $penyakit = Penyakit::find($penyakitTerbanyak);
+        foreach ($possibleDiagnoses as $hasil) {
+            $result = new Result();
+            $result->user_id = auth()->user()->id;
+            $result->penyakit_id = $hasil['penyakit']->id;
+            $result->persentase = $hasil['persentase'] * 100;
+            $result->save();
+        }
 
         return response()->json([
-            'hasil' => $penyakit
+            'message' => 'success',
+            'diagnosa' => HasilDiagnosa::collection(User::find(auth()->user()->id)->diagnosa)
         ], 200);
     }
 }

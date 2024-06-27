@@ -16,7 +16,7 @@ class PenyakitResource extends JsonResource
     {
         return [
             'nama' => $this->nama,
-            'keterangan' => $this->keterangan,
+            'solusi' => $this->solusi,
         ];
     }
 }

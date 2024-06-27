@@ -29,7 +29,7 @@
                 <div class="card-body">
                     <x-form.modal title="Tambah Data Penyakit" action="{{ route('penyakit.store') }}">
                         <x-form.input label="Nama Penyakit" id="penyakitInput" name="nama" :required="true" />
-                        <x-form.textarea label="Keterangan" id="keteranganInput" name="keterangan"
+                        <x-form.textarea label="Solusi" id="solusiInput" name="solusi"
                             :required="true"></x-form.textarea>
                     </x-form.modal>
 
@@ -38,7 +38,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Nama Penyakit</th>
-                                <th>Keterangan</th>
+                                <th>Solusi</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -47,7 +47,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $penyakit->nama }}</td>
-                                    <td>{{ $penyakit->keterangan }}</td>
+                                    <td>{{ $penyakit->solusi }}</td>
                                     <td class="text-center">
                                         <button class="btn btn-primary btn-sm"
                                             onclick="document.location.href = '{{ route('penyakit.edit', $penyakit->id) }}'">Edit</button>

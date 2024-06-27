@@ -25,7 +25,7 @@ class PenyakitController extends Controller
     {
         $data = request()->validate([
             'nama' => 'required',
-            'keterangan' => 'required'
+            'solusi' => 'required'
         ]);
 
         Penyakit::create($data);
@@ -48,7 +48,7 @@ class PenyakitController extends Controller
     {
         $data = request()->validate([
             'nama' => 'required',
-            'keterangan' => 'required'
+            'solusi' => 'required'
         ]);
 
         $penyakit->update($data);
