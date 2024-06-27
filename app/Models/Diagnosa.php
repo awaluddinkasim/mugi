@@ -12,6 +12,8 @@ class Diagnosa extends Model
 
     protected $table = 'diagnosa';
 
+    protected $with = ['hasil'];
+
     public function hasil(): HasMany
     {
         return $this->hasMany(Result::class, 'diagnosa_id');
