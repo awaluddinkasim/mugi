@@ -4,7 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -35,8 +35,8 @@ class User extends Authenticatable
         'password',
     ];
 
-    public function diagnosa(): HasMany
+    public function diagnosa(): HasOne
     {
-        return $this->hasMany(Diagnosa::class, 'user_id');
+        return $this->hasOne(Diagnosa::class, 'user_id');
     }
 }
