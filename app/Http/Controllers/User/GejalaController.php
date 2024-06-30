@@ -14,7 +14,7 @@ class GejalaController extends Controller
     {
         return response()->json([
             'message' => 'success',
-            'daftarPenyakit' => GejalaResource::collection(Gejala::all())
+            'daftarGejala' => GejalaResource::collection(Gejala::has('penyakit')->get())
         ], 200);
     }
 }

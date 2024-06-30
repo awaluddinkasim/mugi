@@ -44,7 +44,7 @@
                                         <h5 class="mb-0">Welcome Back !</h5>
                                         <p class="text-muted mt-2">Sign in to continue to {{ config('app.name') }}.</p>
                                     </div>
-                                    <form class="mt-4 pt-2" action="{{ route('authenticate') }}" method="POST">
+                                    <form class="mt-4 pt-2" action="{{ route('authenticate') }}" method="POST" autocomplete="off">
                                         @csrf
                                         <div class="mb-3">
                                             <label class="form-label">Email</label>

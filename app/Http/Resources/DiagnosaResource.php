@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class HasilDiagnosa extends JsonResource
+class DiagnosaResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,12 +15,10 @@ class HasilDiagnosa extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $tanggal = $this->created_at ?? Carbon::now();
         return [
-            'tanggal' => Carbon::parse($this->created_at)->isoFormat('DD MMMM YYYY'),
-            'hasil' => [
-                'penyakit' => new PenyakitResource($this->hasil->penyakit),
-                'persentase' => $this->hasil->persentase
-            ],
+            'tanggal' => Carbon::parse($tanggal)->isoFormat('DD MMMM YYYY'),
+            'hasil' => HasilResource::collection($this->hasil),
         ];
     }
 }
