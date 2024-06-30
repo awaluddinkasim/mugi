@@ -15,9 +15,11 @@ class DiagnosaResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $tanggal = $this->created_at ?? Carbon::now();
+        $waktu = $this->created_at ?? Carbon::now();
+
         return [
-            'tanggal' => Carbon::parse($tanggal)->isoFormat('DD MMMM YYYY'),
+            'tanggal' => Carbon::parse($waktu)->isoFormat('DD MMMM YYYY'),
+            'pukul' => Carbon::parse($waktu)->isoFormat('HH:mm'),
             'hasil' => HasilResource::collection($this->hasil),
         ];
     }

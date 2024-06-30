@@ -15,9 +15,11 @@ class PenyakitController extends Controller
 {
     public function hasil(): JsonResponse
     {
+        $diagnosa = Diagnosa::where('user_id', request()->user()->id)->with(['hasil', 'hasil.penyakit'])->latest()->get();
+
         return response()->json([
             'message' => 'success',
-            'diagnosa' => DiagnosaResource::collection(User::find(request()->user()->id)->diagnosa)
+            'diagnosa' => DiagnosaResource::collection($diagnosa)
         ], 200);
     }
 
