@@ -30,7 +30,7 @@ class PenyakitController extends Controller
 
         foreach ($daftarPenyakit as $penyakit) {
             $gejalaPenyakit = $penyakit->gejala->pluck('id')->toArray();
-            $gejalaCocok = array_intersect($gejalaPenyakit, $gejalaPengguna);
+            $gejalaCocok = array_intersect($gejalaPenyakit, $gejalaPengguna['id']);
 
             $persentaseCocok = count($gejalaCocok) / count($gejalaPenyakit);
 
