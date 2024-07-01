@@ -31,33 +31,35 @@
                         <x-form.input label="Nama Gejala" id="gejalaInput" name="nama" :required="true" />
                     </x-form.modal>
 
-                    <table id="datatable" class="table table-hover dt-responsive  nowrap w-100">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Nama Gejala</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($daftarGejala as $gejala)
+                    <div class="table-responsive">
+                        <table id="datatable" class="table table-hover dt-responsive  nowrap w-100">
+                            <thead>
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $gejala->nama }}</td>
-                                    <td class="text-center">
-                                        <button class="btn btn-primary btn-sm"
-                                            onclick="document.location.href = '{{ route('gejala.edit', $gejala->id) }}'">Edit</button>
-                                        <form action="{{ route('gejala.destroy', $gejala->id) }}" method="post"
-                                            class="d-inline">
-                                            @method('DELETE')
-                                            @csrf
-                                            <button class="btn btn-danger btn-sm">Hapus</button>
-                                        </form>
-                                    </td>
+                                    <th>#</th>
+                                    <th>Nama Gejala</th>
+                                    <th></th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($daftarGejala as $gejala)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $gejala->nama }}</td>
+                                        <td class="text-center">
+                                            <button class="btn btn-primary btn-sm"
+                                                onclick="document.location.href = '{{ route('gejala.edit', $gejala->id) }}'">Edit</button>
+                                            <form action="{{ route('gejala.destroy', $gejala->id) }}" method="post"
+                                                class="d-inline">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button class="btn btn-danger btn-sm">Hapus</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
