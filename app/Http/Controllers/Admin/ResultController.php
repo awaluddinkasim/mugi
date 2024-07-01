@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Diagnosa;
 use App\Models\Result;
 use Illuminate\Http\Request;
 
@@ -14,16 +15,23 @@ class ResultController extends Controller
     public function index()
     {
         return view('pages.result', [
-            'results' => Result::with(['user', 'penyakit'])->get()
+            'daftarDiagnosa' => Diagnosa::with(['hasil'])->get()
+        ]);
+    }
+
+    public function show(Diagnosa $diagnosa)
+    {
+        return view('pages.result-detail', [
+            'diagnosa' => $diagnosa,
         ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Result $result)
+    public function destroy(Diagnosa $diagnosa)
     {
-        $result->delete();
+        $diagnosa->delete();
 
         return redirect()->back()->with('success', 'Berhasil menghapus hasil diagnosa');
     }

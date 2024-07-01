@@ -32,17 +32,17 @@
 
                 <li>
                     <a href="{{ route('relasi.index') }}">
-                        <i data-feather="clipboard"></i>
+                        <i data-feather="command"></i>
                         <span data-key="t-relasi">Relasi</span>
                     </a>
                 </li>
 
-                {{-- <li>
-                    <a href="{{ route('result.index') }}">
+                <li>
+                    <a href="{{ route('hasil.index') }}">
                         <i data-feather="clipboard"></i>
                         <span data-key="t-relasi">Hasil Diagnosa</span>
                     </a>
-                </li> --}}
+                </li>
 
                 <li>
                     <a href="{{ route('user.index') }}">

@@ -44,9 +44,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::delete('/{relasi:id}/destroy', [RelasiController::class, 'destroy'])->name('destroy');
     });
 
-    Route::group(['prefix' => 'result', 'as' => 'result.'], function () {
+    Route::group(['prefix' => 'hasil', 'as' => 'hasil.'], function () {
         Route::get('/', [ResultController::class, 'index'])->name('index');
-        Route::delete('/{result:id}/destroy', [ResultController::class, 'destroy'])->name('destroy');
+        Route::get('/{diagnosa:id}', [ResultController::class, 'show'])->name('show');
+        Route::delete('/{diagnosa:id}/destroy', [ResultController::class, 'destroy'])->name('destroy');
     });
 
     Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
