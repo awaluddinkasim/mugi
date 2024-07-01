@@ -46,7 +46,13 @@ class PenyakitController extends Controller
         }
 
         usort($possibleDiagnoses, function ($a, $b) {
-            return $b['persentase'] - $a['persentase'];
+            if ($a['persentase'] > $b['persentase']) {
+                return -1;
+            } elseif ($a['persentase'] < $b['persentase']) {
+                return 1;
+            } else {
+                return 0;
+            }
         });
 
         $diagnosa = new Diagnosa();
