@@ -69,8 +69,28 @@
     <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
     <script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
     <script src="{{ asset('assets/libs/feather-icons/feather.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/sweetalert2/sweetalert2.all.min.js') }}"></script>
 
     <script src="{{ asset('assets/js/app.js') }}"></script>
+
+    @if (Session::has('success'))
+        <script>
+            Swal.fire({
+                title: "Berhasil",
+                text: "{{ Session::get('success') }}",
+                icon: "success"
+            });
+        </script>
+    @endif
+    @if (Session::has('error'))
+        <script>
+            Swal.fire({
+                title: "Berhasil",
+                text: "{{ Session::get('error') }}",
+                icon: "error"
+            });
+        </script>
+    @endif
 
     @stack('scripts')
 </body>
