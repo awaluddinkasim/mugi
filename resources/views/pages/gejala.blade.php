@@ -21,10 +21,10 @@
 
 <x-layout title="Data Gejala">
     <div class="row">
-        <div class="col-md-6 text-center">
+        <div class="col-lg-6 text-center d-none d-lg-block">
             <img src="{{ asset('assets/images/gejala.svg') }}" alt="" class="w-75">
         </div>
-        <div class="col-md-6">
+        <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
                     <x-form.modal title="Tambah Data Gejala" action="{{ route('gejala.store') }}">

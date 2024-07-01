@@ -7,7 +7,6 @@ use App\Http\Resources\DiagnosaResource;
 use App\Models\Diagnosa;
 use App\Models\Penyakit;
 use App\Models\Result;
-use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -27,7 +26,7 @@ class PenyakitController extends Controller
     {
         $gejalaPengguna = request()->gejala ?? [];
 
-        $daftarPenyakit = Penyakit::with('gejala')->get();
+        $daftarPenyakit = Penyakit::has('gejala')->get();
         $possibleDiagnoses = [];
 
         foreach ($daftarPenyakit as $penyakit) {

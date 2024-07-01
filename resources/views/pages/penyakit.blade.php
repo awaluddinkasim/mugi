@@ -21,10 +21,10 @@
 
 <x-layout title="Data Penyakit">
     <div class="row">
-        <div class="col-md-5 text-center">
+        <div class="col-lg-5 text-center d-none d-lg-block">
             <img src="{{ asset('assets/images/penyakit.svg') }}" alt="" class="w-75">
         </div>
-        <div class="col-md-7">
+        <div class="col-lg-7">
             <div class="card">
                 <div class="card-body">
                     <x-form.modal title="Tambah Data Penyakit" action="{{ route('penyakit.store') }}">
