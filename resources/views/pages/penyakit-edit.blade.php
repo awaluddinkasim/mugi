@@ -11,8 +11,14 @@
                         @csrf
                         <x-form.input label="Nama Penyakit" id="penyakitInput" name="nama" :value="$penyakit->nama"
                             :required="true" />
-                        <x-form.textarea label="Solusi" id="solusiInput" name="solusi"
-                            :required="true">{{ $penyakit->solusi }}</x-form.textarea>
+                        <x-form.textarea label="Deskripsi" id="deskripsiInput" name="deskripsi"
+                            :required="true">{{ $penyakit->deskripsi }}</x-form.textarea>
+                        <x-form.textarea label="Cara Penanganan" id="caraPenangananInput" name="cara_penanganan"
+                            :required="true">{{ $penyakit->cara_penanganan }}</x-form.textarea>
+                        <x-form.select label="Jenis Penyakit" id="jenisInput" name="jenis" :required="true">
+                            <option value="Mulut" {{ $penyakit->jenis == 'Mulut' ? 'selected' : '' }}>Mulut</option>
+                            <option value="Gigi" {{ $penyakit->jenis == 'Gigi' ? 'selected' : '' }}>Gigi</option>
+                        </x-form.select>
 
                         <button class="btn btn-primary">Simpan</button>
                     </form>

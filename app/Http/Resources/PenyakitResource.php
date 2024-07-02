@@ -16,7 +16,9 @@ class PenyakitResource extends JsonResource
     {
         return [
             'nama' => $this->nama,
-            'solusi' => $this->solusi,
+            'deskripsi' => $this->deskripsi,
+            'cara_penanganan' => $this->cara_penanganan,
+            'jenis' => $this->jenis,
             'gejala' => GejalaResource::collection($this->gejala),
         ];
     }

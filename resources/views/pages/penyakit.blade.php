@@ -21,16 +21,22 @@
 
 <x-layout title="Data Penyakit">
     <div class="row">
-        <div class="col-lg-6 text-center d-none d-lg-block">
+        <div class="col-lg-5 text-center d-none d-lg-block">
             <img src="{{ asset('assets/images/penyakit.svg') }}" alt="" class="w-75">
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-7">
             <div class="card">
                 <div class="card-body">
                     <x-form.modal title="Tambah Data Penyakit" action="{{ route('penyakit.store') }}">
                         <x-form.input label="Nama Penyakit" id="penyakitInput" name="nama" :required="true" />
-                        <x-form.textarea label="Solusi" id="solusiInput" name="solusi"
+                        <x-form.textarea label="Deskripsi" id="deskripsiInput" name="deskripsi"
                             :required="true"></x-form.textarea>
+                        <x-form.textarea label="Cara Penanganan" id="caraPenangananInput" name="cara_penanganan"
+                            :required="true"></x-form.textarea>
+                        <x-form.select label="Jenis Penyakit" id="jenisInput" name="jenis" :required="true">
+                            <option value="Mulut">Mulut</option>
+                            <option value="Gigi">Gigi</option>
+                        </x-form.select>
                     </x-form.modal>
 
                     <div class="table-responsive">
@@ -39,6 +45,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Nama Penyakit</th>
+                                    <th>Jenis Penyakit</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -47,6 +54,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $penyakit->nama }}</td>
+                                        <td>{{ $penyakit->jenis }}</td>
                                         <td class="text-center">
                                             <button class="btn btn-primary btn-sm"
                                                 onclick="document.location.href = '{{ route('penyakit.edit', $penyakit->id) }}'">Edit</button>

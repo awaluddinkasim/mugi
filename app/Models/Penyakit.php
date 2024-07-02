@@ -14,7 +14,9 @@ class Penyakit extends Model
 
     protected $fillable = [
         'nama',
-        'solusi',
+        'deskripsi',
+        'cara_penanganan',
+        'jenis',
     ];
 
     public function gejala(): BelongsToMany

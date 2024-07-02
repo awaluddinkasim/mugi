@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('penyakit', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->text('solusi');
+            $table->text('deskripsi');
+            $table->text('cara_penanganan');
+            $table->enum('jenis', ['Mulut', 'Gigi']);
             $table->timestamps();
         });
     }
