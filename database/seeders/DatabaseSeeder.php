@@ -21,6 +21,11 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('123')
         ]);
 
-        User::factory(10)->create();
+        User::factory(14)->create();
+
+        $this->call([
+            GejalaSeeder::class,
+            PenyakitSeeder::class,
+        ]);
     }
 }
