@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('diagnosa_id')->constrained('diagnosa')->cascadeOnDelete();
             $table->foreignId('penyakit_id')->constrained('penyakit')->cascadeOnDelete();
-            $table->decimal('persentase');
+            $table->decimal('persentase', 3, 2);
             $table->timestamps();
         });
     }
