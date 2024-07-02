@@ -38,22 +38,30 @@
         <div class="col-md-7">
             <div class="card">
                 <div class="card-body">
-                    <table class="table">
-                        <thead>
-                            <th>#</th>
-                            <th>Penyakit</th>
-                            <th>Kecocokan Gejala</th>
-                        </thead>
-                        <tbody>
-                            @foreach ($diagnosa->hasil as $hasil)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $hasil->penyakit->nama }}</td>
-                                    <td>{{ $hasil->persentase }}%</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    @if ($diagnosa->hasil->count())
+                        <table class="table">
+                            <thead>
+                                <th>#</th>
+                                <th>Penyakit</th>
+                                <th>Kecocokan Gejala</th>
+                            </thead>
+                            <tbody>
+                                @foreach ($diagnosa->hasil as $hasil)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $hasil->penyakit->nama }}</td>
+                                        <td>{{ $hasil->persentase }}%</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    @else
+                        <div class="text-center">
+                            <img src="{{ asset('assets/images/healthy.svg') }}" alt="" style="width: 300px"
+                                class="mb-3">
+                            <p class="text-center pb-5">Tidak ada penyakit ditemukan</p>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
