@@ -50,7 +50,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $hasil->penyakit->nama }}</td>
-                                        <td>{{ $hasil->persentase }}%</td>
+                                        <td>{{ number_format($hasil->persentase, 2) }}%</td>
                                     </tr>
                                 @endforeach
                             </tbody>
